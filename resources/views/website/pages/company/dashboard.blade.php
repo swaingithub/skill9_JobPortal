@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
 @extends('website.layouts.app')
 
 @section('title', __('dashboard'))
@@ -21,7 +22,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="openjob-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $openJobCount }}</h6>
                                         <p>{{ __('open_job') }}</p>
@@ -32,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="savedcandidate-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $savedCandidates }}</h6>
                                         <p>{{ __('saved_candidate') }}</p>
@@ -43,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box bg-danger-50">
+                                <div class="single-feature-box bg-danger-50" id="pendingjob-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $pendingJobCount }}</h6>
                                         <p>{{ __('pending_jobs') }}</p>
@@ -57,7 +58,7 @@
                         <div class="row">
                             <h5>@lang('remaining_features_on_current_plan')</h5>
                             <div class="col-xl-3 col-lg-6 col-md-6">
-                                <div class="single-feature-box bg-success-50">
+                                <div class="single-feature-box bg-success-50" id="activejob-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $userplan->job_limit }}</h6>
                                         <p>{{ __('active_jobs') }}</p>
@@ -68,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6">
-                                <div class="single-feature-box bg-warning-50">
+                                <div class="single-feature-box bg-warning-50" id="highilight-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $userplan->highlight_job_limit }}</h6>
                                         <p>{{ __('highlight_jobs') }}</p>
@@ -79,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="featuredjob-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $userplan->featured_job_limit }}</h6>
                                         <p>{{ __('featured_jobs') }}</p>
@@ -90,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6">
-                                <div class="single-feature-box bg-danger-50">
+                                <div class="single-feature-box bg-danger-50" id="profileview-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $userplan->candidate_cv_view_limit }}</h6>
                                         <p>{{ __('profile_view') }}</p>
