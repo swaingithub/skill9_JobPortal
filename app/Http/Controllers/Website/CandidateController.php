@@ -339,6 +339,11 @@ class CandidateController extends Controller
                 'secondary_email' => $request->secondary_email,
             ]);
         } else {
+             $request->validate([
+            'phone' => 'required|min:10|max:10',
+            'secondary_phone' => 'required|min:10|max:10',
+
+        ]);
             $contact->update([
                 'phone' => $request->phone,
                 'secondary_phone' => $request->secondary_phone,
