@@ -157,7 +157,7 @@
                                                             class="d-flex align-items-center form-control-icon date datepicker">
                                                             <input type="text" name="establishment_date"
                                                                 value="{{ $user->company->establishment_date ? date('d-m-Y', strtotime($user->company->establishment_date)) : old('establishment_date') }}"
-                                                                id="date" placeholder="dd/mm/yyyy"
+                                                                id="date" placeholder="DD/MM/YYYY"
                                                                 class="form-control border-cutom @error('establishment_date') is-invalid @enderror" />
                                                             <span class="input-group-addon input-group-text-custom">
                                                                 <x-svg.calendar-icon />
@@ -366,7 +366,7 @@
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="type" value="contact">
-                                        <div class="dashboard-account-setting-item pb-0">
+                                        {{-- <div class="dashboard-account-setting-item pb-0">
                                            <x-website.map.map-warning/>
                                             <h6>
                                                 {{ __('company_location') }}
@@ -388,7 +388,7 @@
                                                     <span class="ml-3 text-md text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="dashboard-account-setting-item">
                                             <h6>{{ __('phone') }} & {{ __('email') }}</h6>
@@ -774,7 +774,7 @@
         <!-- ============== map box end ============= -->
     @else
         <!-- ============== google map ========= -->
-        <x-website.map.google-map-check/>
+        {{-- <x-website.map.google-map-check/>
         <script>
             function initMap() {
                 var token = "{{ $setting->google_map_key }}";
@@ -926,6 +926,6 @@
                 $scr = $link1 . $link2 . $Link3;
             @endphp;
         </script>
-        <script src="{{ $scr }}" async defer></script>
+        <script src="{{ $scr }}" async defer></script> --}}
     @endif
 @endsection
