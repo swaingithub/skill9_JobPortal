@@ -1,14 +1,16 @@
+<link rel="stylesheet" href="{{asset('cssfile/style.css')}}">
 <header class="header rt-fixed-top">
     <div class="n-header">
-        <div class="n-header--top relative">
-            <div class="container">
+        <div class="n-header--top relative" style="background-image: linear-gradient(to right, rgb(246, 242, 242), #82c0d1) !important;">
+            <div class="container" >
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="n-header--top__left main-menu">
                         <div
                             class="mbl-top d-flex align-items-center justify-content-between container position-relative d-lg-none">
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('website.home') }}" class="brand-logo">
+                                {{-- <a href="{{ route('website.home') }}" class="brand-logo"> --}}
                                     <img src="{{ $setting->dark_logo_url }}" alt="">
+                                    <img src="{{asset('frontend\assets\images\skill9_png_logo-2.png')}}" alt="" >
                                 </a>
                             </div>
 
@@ -63,7 +65,7 @@
                                                 @if (auth()->user()->role !== 'company' && auth()->user()->role !== 'candidate')
                                                     <li>
                                                         <a href="{{ route('company.job.create') }}">
-                                                            <button class="btn btn-primary">
+                                                            <button class="btn btn-primary" style=" background:hsl(196, 45%, 54%) !important"">
                                                                 {{ __('post_job') }}
                                                             </button>
                                                         </a>
@@ -91,7 +93,7 @@
                                             <li>
                                                 <a href="{{ route('company.job.create') }}"
                                                     class="btn btn-primary text-white"
-                                                    style="padding:12px 24px !important;">{{ __('post_a_job') }}
+                                                    style="padding:12px 24px !important; background:hsl(196, 45%, 54%) !important">{{ __('post_a_job') }}
                                                 </a>
                                             </li>
                                         </ul>
@@ -128,7 +130,7 @@
                                     </ul>
                                 </div>
                             @else
-                                <div class="container">
+                                <div class="containe">
                                     <ul class="menu-active-classes ">
                                         <li class="menu-item"><a
                                                 class="{{ linkActive('website.home', 'text-primary') }}"
@@ -377,11 +379,13 @@
                                     @endif
 
                                     <li class="relative">
-                                        <a href="{{ route('user.dashboard') }} " class="candidate-profile">
+                                        <a href="{{ route('user.dashboard') }}" class="candidate-profile">
                                             @company
-                                                <img src="{{ auth()->user()->company->logo_url }}" alt="">
+                                                <img src="{{ auth()->user()->company->logo_url }}" alt="Company Logo">
                                             @else
-                                                <img src="{{ auth()->user()->candidate->photo }}" alt="">
+                                                <img src="{{ auth()->user()->candidate->photo }}" alt="Candidate Photo">
+                                                <span class="tooltip-profile-name"
+                                                    style="display: none;">{{ auth()->user()->name }}</span>
                                             @endcompany
                                         </a>
                                     </li>
@@ -389,7 +393,7 @@
                                         <li class="d-none d-sm-block">
                                             @company
                                                 <a href="{{ route('company.job.create') }}">
-                                                    <button class="btn btn-primary">
+                                                    <button class="btn btn-primary" style=" background:hsl(196, 45%, 54%) !important"">
                                                         {{ __('post_job') }}
                                                     </button>
                                                 </a>
@@ -420,7 +424,7 @@
                                     </li>
                                     <li class="d-none d-sm-block">
                                         <a href="{{ route('company.job.create') }}"
-                                            class="btn btn-primary">{{ __('post_job') }}
+                                            class="btn btn-primary" style=" background:hsl(196, 45%, 54%) !important"">{{ __('post_job') }}
                                         </a>
                                     </li>
                                 </ul>
@@ -433,3 +437,16 @@
         <div class="rt-mobile-menu-overlay"></div>
     </div>
 </header>
+<!-- Add jQuery library (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add the following script -->
+<script>
+    $(document).ready(function() {
+        $('.candidate-profile').hover(function() {
+            var profileName = $(this).find('.tooltip-profile-name').text();
+            $(this).attr('title', '' + profileName + "'s profile");
+        });
+    });
+</script>
+
