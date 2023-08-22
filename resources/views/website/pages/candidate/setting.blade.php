@@ -222,6 +222,7 @@
                                                 <x-forms.label :required="true" name="nationality"
                                                     class="body-font-4 d-block text-gray-900 rt-mb-8" />
                                                 <select name="nationality" class="rt-selectactive w-100">
+                                                    // <option value="">{{_('India')}}</option>
                                                     @foreach ($nationalities as $nationality)
                                                     <option
                                                         {{ $candidate->nationality_id == $nationality->id ? 'selected' : '' }}
@@ -290,7 +291,7 @@
                                                     <div class="d-flex align-items-center form-control-icon date datepicker">
                                                         <input type="text" name="birth_date"
                                                                 value="{{ $candidate->birth_date ? date('d-m-Y', strtotime($candidate->birth_date)) : old('birth_date') }}"
-                                                                id="date" placeholder="dd/mm/yyyy"
+                                                                id="date" placeholder="DD/MM/YYYY"
                                                                 class="form-control border-cutom @error('birth_date') is-invalid @enderror" />
                                                         <span class="input-group-addon input-group-text-custom">
                                                             <x-svg.calendar-icon />
@@ -418,7 +419,7 @@
                                     @csrf
                                     @method('put')
                                     <input type="hidden" name="type" value="contact">
-                                    <div class="dashboard-account-setting-item pb-0">
+                                    {{-- <div class="dashboard-account-setting-item pb-0">
                                         <h6>{{ __('locations') }}</h6>
                                         <div class="row">
                                             <div class="col-lg-12 mb-3">
@@ -440,20 +441,20 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="dashboard-account-setting-item">
                                         <h6>{{ __('phone_email') }}</h6>
                                         <div class="row">
                                             <div class="col-lg-6 mb-3">
                                                 <x-forms.label :required="false" name="phone"
                                                     class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                <x-forms.input type="text" name="phone" value="{{ $contact->phone }}"
+                                                <x-forms.input type="number" name="phone" value="{{ $contact->phone }}"
                                                     id="phone" placeholder="{{ __('phone') }}" class="phonecode" />
                                             </div>
                                             <div class="col-lg-6 mb-3">
                                                 <x-forms.label :required="false" name="secondary_phone"
                                                     class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                <x-forms.input type="text" name="secondary_phone"
+                                                <x-forms.input type="number" name="secondary_phone"
                                                     value="{{ $contact->secondary_phone }}" id="phone2"
                                                     placeholder="{{ __('phone') }}" class="phonecode" />
                                             </div>
@@ -480,11 +481,12 @@
                                 <hr>
                                 <div class="dashboard-account-setting-item setting-border">
                                     {{-- <h6>{{ __('notification') }}</h6> --}}
-                                    <form id="alert" action="{{ route('candidate.settingUpdate') }}" method="POST">
+                                    {{-- <form id="alert" action="{{ route('candidate.settingUpdate') }}" method="POST"> --}}
+                                        <form action="{{ route('candidate.settingUpdate') }}" method="POST">
                                         @csrf
                                         @method('put')
-                                        {{-- <input type="hidden" name="type" value="alert">
-                                        <div class="row">
+                                         <input type="hidden" name="type" value="alert">
+                                        {{--<div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-check from-chekbox-custom rt-mb-15">
                                                     <input name="shortlisted" class="form-check-input" type="checkbox"
@@ -1089,8 +1091,8 @@
 </script>
 <!-- ============== map box ============= -->
 <!-- ============== google map ========= -->
-<x-website.map.google-map-check/>
-<script>
+{{-- <x-website.map.google-map-check/> --}}
+{{-- <script>
     function initMap() {
         var token = "{{ $setting->google_map_key }}";
         var oldlat = {!! $candidate->lat ? $candidate->lat : setting('default_lat') !!};
@@ -1243,13 +1245,13 @@
     $scr = $link1.$link2.$Link3;
     @endphp;
 </script>
-<script src="{{ $scr }}" async defer></script>
+<script src="{{ $scr }}" async defer></script> --}}
 <!-- =============== google map ========= -->
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function () {
         $("[data-toggle=tooltip]").tooltip()
     })
-</script>
+</script> --}}
 <!-- >=>Mapbox<=< -->
 <script>
     $('#pills-contact-tab').on('click', function () {
