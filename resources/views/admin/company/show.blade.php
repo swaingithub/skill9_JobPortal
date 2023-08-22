@@ -137,7 +137,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -159,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -352,7 +352,7 @@
     </script>
     <!-- ================ mapbox map ============== -->
     <!-- ================ google map ============== -->
-    <x-website.map.google-map-check/>
+    {{-- <x-website.map.google-map-check/>
 
     <script>
         function initMap() {
@@ -392,6 +392,6 @@
             $scr = $link1 . $link2 . $Link3;
         @endphp;
     </script>
-    <script src="{{ $scr }}" async defer></script>
+    <script src="{{ $scr }}" async defer></script> --}}
     <!-- ================ google map ============== -->
 @endsection
