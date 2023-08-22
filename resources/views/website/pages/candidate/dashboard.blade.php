@@ -23,7 +23,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="profileview-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $appliedJobs }}</h6>
                                         <p>{{ __('job_applied') }}</p>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="featuredjob-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $favoriteJobs }}</h6>
                                         <p>{{ __('favorite_jobs') }}</p>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="single-feature-box">
+                                <div class="single-feature-box" id="highilight-section">
                                     <div class="single-feature-data">
                                         <h6>{{ $notifications }}</h6>
                                         <p>{{ __('job_alert') }}</p>
