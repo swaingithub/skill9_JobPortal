@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-header">
                             <div class="card-title">
                                 {{ __('location') }}
@@ -137,7 +137,7 @@
                             @enderror
 
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-6">
                     <div class="card">
@@ -597,7 +597,7 @@
     </script>
     <!-- ============== map box ============= -->
     <!-- ============== google map ========= -->
-    <x-website.map.google-map-check/>
+    {{-- <x-website.map.google-map-check/>
     <script>
         function initMap() {
             var token = "{{ $setting->google_map_key }}";
@@ -776,7 +776,7 @@
             $scr = $link1 . $link2 . $Link3;
         @endphp;
     </script>
-    <script src="{{ $scr }}" async defer></script>
+    <script src="{{ $scr }}" async defer></script> --}}
     <!-- =============== google map ========= -->
     <script type="text/javascript">
         $(document).ready(function() {
