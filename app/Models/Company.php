@@ -36,46 +36,7 @@ class Company extends Model
         static::created(function ($company) {
             $setting = Setting::first();
             $plan = Plan::find($setting->default_plan);
-
-        //     //   $company->userPlan()->create([
-        //     //     'plan_id'  =>  $setting->default_plan,
-        //     //     'job_limit'  =>  $plan->job_limit,
-        //     //     'featured_job_limit'  =>  $plan->featured_job_limit,
-        //     //     'highlight_job_limit'  =>  $plan->highlight_job_limit,
-        //     //     'candidate_cv_view_limit'  =>  $plan->candidate_cv_view_limit,
-        //     // ]);
-        //     if ($setting->candidate_cv_view_limit !== null) {
-        //         if ($setting->candidate_cv_view_limit !== null) {
-        //         $company->userPlan()->create([
-        //             'plan_id'                  => $setting->default_plan,
-        //             'job_limit'                => $setting->job_limit,
-        //             'featured_job_limit'       => $setting->featured_job_limit,
-        //             'highlight_job_limit'      => $setting->highlight_job_limit,
-        //             'candidate_cv_view_limit'  => $setting->candidate_cv_view_limit,
-        //         ]);
-        //     } else {
-        //         // Handle the case when $setting->candidate_cv_view_limit is null
-        //         // For example, you could set a default value or skip creating the user plan.
-        //         // You might also want to log or notify about this scenario.
-        //         $defaultCandidateCVViewLimit = 10; // Set your default value here
-        //         $company->userPlan()->create([
-        //             'plan_id'                  => $setting->default_plan,
-        //             'job_limit'                => $setting->job_limit,
-        //             'featured_job_limit'       => $setting->featured_job_limit,
-        //             'highlight_job_limit'      => $setting->highlight_job_limit,
-        //             'candidate_cv_view_limit'  => $defaultCandidateCVViewLimit,
-        //         ]);
-        //     }
-        // }
-        // //    $company->userPlan()->create([
-        // //     'plan_id' => 1,
-        // //     'job_limit' => 999,
-        // //     'featured_job_limit' => 0,
-        // //     'highlight_job_limit' => 0,
-        // //     'candidate_cv_view_limit' => 200,
-        // // ]);
-
-         $company->userPlan()->create([
+            $company->userPlan()->create([
                 'plan_id'  =>  $setting->default_plan,
                 'job_limit'  =>  1000,
                 'featured_job_limit'  =>  1000,

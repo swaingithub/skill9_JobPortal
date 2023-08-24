@@ -220,107 +220,97 @@
                                             </div>
                                         @endforeach
 
-                                        <div class="resume-item add-resume" data-bs-toggle="modal"
-                                            data-bs-target="#resumeModal">
-                                            <div class="resume-icon">
-                                                <x-svg.plus-icon />
-                                            </div>
-                                            <div>
-                                                <h4 class="resume-title">{{ __('add_cv_resume') }}</h4>
-                                                <h6 class="resume-size">{{ __('browse_file_here_only') }} - pdf</h6>
-                                            </div>
+                                    <div class="resume-item add-resume" data-bs-toggle="modal"
+                                        data-bs-target="#resumeModal">
+                                        <div class="resume-icon">
+                                            <x-svg.plus-icon />
+                                        </div>
+                                        <div>
+                                            <h4 class="resume-title">{{ __('add_cv_resume') }}</h4>
+                                            <h6 class="resume-size">{{ __('browse_file_here_only') }} - pdf</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade {{ session('type') == 'profile' ? 'show active' : '' }}"
-                                    id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    <form action="{{ route('candidate.settingUpdate') }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <div class="dashboard-account-setting-item pb-0">
-                                            <input type="hidden" name="type" value="profile">
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-3">
-                                                    <label class="text-dark" for="role">{{ __('nationality') }}:
-                                                        <sup class="text-danger">*</sup></label>
-                                                    <select name="nationality" class="rt-selectactive w-100-p" required>
-                                                        {{-- <option value="none" selected disabled hidden>
-                                                            {{ __('') }} {{ __('--Select--') }}
-                                                        </option> --}}
-                                                        @foreach ($nationalities as $nationality)
-                                                            <option
-                                                                {{ $candidate->nationality_id == $nationality->id ? 'selected' : '' }}
-                                                                value="{{ $nationality->id }}">
-                                                                {{ $nationality->name }}</option>
-                                                            {{-- <option
-                                                                {{ app('request')->input('type') == $nationality->id ? 'selected' : '' }}
-                                                                value="{{ $nationality->id }}">{{ $nationality->name }}
-                                                            </option> --}}
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="true" name="gender"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <select class="select2-taggable w-100-p" required
-                                                        @error('gender') is-invalid @enderror name="gender">
-                                                        <option @if ($candidate->gender == 'male') selected @endif
-                                                            value="male">
-                                                            {{ __('male') }}
+                            </div>
+                            <div class="tab-pane fade {{ session('type') == 'profile' ? 'show active' : '' }}"
+                                id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <form action="{{ route('candidate.settingUpdate') }}" method="POST">
+                                    @csrf
+                                    @method('put')
+                                    <div class="dashboard-account-setting-item pb-0">
+                                        <input type="hidden" name="type" value="profile">
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="true" name="nationality"
+                                                    class="body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <select name="nationality" class="rt-selectactive w-100">
+                                                    @foreach ($nationalities as $nationality)
+                                                    <option
+                                                        {{ $candidate->nationality_id == $nationality->id ? 'selected' : '' }}
+                                                        value="{{ $nationality->id }}">
+                                                        {{ $nationality->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="true" name="gender"
+                                                    class="body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <select
+                                                    class="rt-selectactive w-100-p @error('gender') is-invalid @enderror"
+                                                    name="gender">
+                                                    <option @if ($candidate->gender == 'male') selected @endif
+                                                        value="male">
+                                                        {{ __('male') }}
+                                                    </option>
+                                                    <option @if ($candidate->gender == 'female') selected @endif
+                                                        value="female">
+                                                        {{ __('female') }}
+                                                    </option>
+                                                    <option @if ($candidate->gender == 'other') selected @endif
+                                                        value="other">
+                                                        {{ __('other') }}
+                                                    </option>
+                                                </select>
+                                                @error('gender')
+                                                    <span class="invalid-feedback"
+                                                        role="alert">{{ __($message) }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="true" name="marital_status"
+                                                    class="body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <select name="marital_status" class="rt-selectactive w-100-p">
+                                                    <option @if ($candidate->marital_status == 'married') selected @endif
+                                                        value="married">{{ __('married') }}</option>
+                                                    <option @if ($candidate->marital_status == 'single') selected @endif
+                                                        value="single">{{ __('single') }}</option>
+                                                </select>
+                                                @error('marital_status')
+                                                    <span class="invalid-feedback"
+                                                        role="alert">{{ __($message) }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="true" name="profession"
+                                                    class="body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <select name="profession" class="select2-taggable w-100-p">
+                                                    @foreach ($professions as $profession)
+                                                        <option
+                                                            {{ $candidate->profession_id == $profession->id ? 'selected' : '' }}
+                                                            value="{{ $profession->id }}">{{ $profession->name }}
                                                         </option>
-                                                        <option @if ($candidate->gender == 'female') selected @endif
-                                                            value="female">
-                                                            {{ __('female') }}
-                                                        </option>
-                                                        <option @if ($candidate->gender == 'other') selected @endif
-                                                            value="other">
-                                                            {{ __('other') }}
-                                                        </option>
-                                                    </select>
-                                                    @error('gender')
-                                                        <span class="invalid-feedback"
-                                                            role="alert">{{ __($message) }}</span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="true" name="marital_status"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <select name="marital_status" class="rt-selectactive w-100-p">
-
-                                                        <option @if ($candidate->marital_status == 'married') selected @endif
-                                                            value="married">{{ __('married') }}</option>
-                                                        <option @if ($candidate->marital_status == 'single') selected @endif
-                                                            value="single">{{ __('single') }}</option>
-                                                    </select>
-                                                    @error('marital_status')
-                                                        <span class="invalid-feedback"
-                                                            role="alert">{{ __($message) }}</span>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="true" name="profession"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <select name="profession" class="rt-selectactive w-100-p" required>
-                                                        @foreach ($professions as $profession)
-                                                            <option
-                                                                {{ $candidate->profession_id == $profession->id ? 'selected' : '' }}
-                                                                value="{{ $profession->id }}">
-                                                                {{ $profession->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('profession')
-                                                        <span class="invalid-feedback"
-                                                            role="alert">{{ __($message) }}</span>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="true" name="date_of_birth"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <div class="fromGroup">
-                                                        <div
-                                                            class="d-flex align-items-center form-control-icon date datepicker">
-                                                            <input type="text" name="birth_date"
+                                                    @endforeach
+                                                </select>
+                                                @error('profession')
+                                                    <span class="invalid-feedback"
+                                                        role="alert">{{ __($message) }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="true" name="date_of_birth"  class="body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <div class="fromGroup">
+                                                    <div class="d-flex align-items-center form-control-icon date datepicker">
+                                                        <input type="text" name="birth_date"
                                                                 value="{{ $candidate->birth_date ? date('d-m-Y', strtotime($candidate->birth_date)) : old('birth_date') }}"
                                                                 id="date" placeholder="DD/MM/YYYY"
                                                                 class="form-control border-cutom @error('birth_date') is-invalid @enderror" />
@@ -509,209 +499,201 @@
                                             </button>
                                     </div>
 
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade {{ session('type') == 'alert' || session('type') == 'contact' || session('type') == 'visibility' || session('type') == 'password' || session('type') == 'account-delete' ? 'show active' : '' }} {{ error('password', 'show active') }}"
-                                    id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
-                                    <form action="{{ route('candidate.settingUpdate') }}" method="POST">
+                                </form>
+                            </div>
+                            <div class="tab-pane fade {{ session('type') == 'alert' || session('type') == 'contact' || session('type') == 'visibility' || session('type') == 'password' || session('type') == 'account-delete' ? 'show active' : '' }} {{ error('password', 'show active') }}"
+                                id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
+                                <form action="{{ route('candidate.settingUpdate') }}" method="POST">
+                                    @csrf
+                                    @method('put')
+                                    <input type="hidden" name="type" value="contact">
+                                    <div class="dashboard-account-setting-item pb-0">
+                                        <h6>{{ __('locations') }}</h6>
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-3">
+                                                <x-website.map.map-warning/>
+                                                @php
+                                                $map = setting('default_map');
+                                                @endphp
+                                                <div class="map mymap {{ $map == 'map-box' ? '' : 'd-none' }}"
+                                                    id="map-box">
+                                                </div>
+                                                <div id="google-map-div"
+                                                    class="{{ $map == 'google-map' ? '' : 'd-none' }}">
+                                                    <input id="searchInput" class="mapClass" type="text"
+                                                        placeholder="Enter a location">
+                                                    <div class="map mymap" id="google-map"></div>
+                                                </div>
+                                                @error('location')
+                                                <span class="ml-3 text-md text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dashboard-account-setting-item">
+                                        <h6>{{ __('phone_email') }}</h6>
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="false" name="phone"
+                                                    class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <x-forms.input type="text" name="phone" value="{{ $contact->phone }}"
+                                                    id="phone" placeholder="{{ __('phone') }}" class="phonecode" />
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="false" name="secondary_phone"
+                                                    class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <x-forms.input type="text" name="secondary_phone"
+                                                    value="{{ $contact->secondary_phone }}" id="phone2"
+                                                    placeholder="{{ __('phone') }}" class="phonecode" />
+                                            </div>
+                                            <div class="col-lg-6 mb-3">
+                                                <x-forms.label :required="false" name="email"
+                                                    class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
+                                                <div class="fromGroup has-icon2">
+                                                    <div class="form-control-icon">
+                                                        <x-forms.input type="email" name="email"
+                                                            value="{{ $contact->email }}" id=""
+                                                            placeholder="{{ __('email_address') }}" class="" />
+                                                        <div class="icon-badge-2">
+                                                            <x-svg.envelope-icon/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-4">
+                                            {{ __('save_changes') }}
+                                        </button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="dashboard-account-setting-item setting-border">
+                                    {{-- <h6>{{ __('notification') }}</h6> --}}
+                                    <form id="alert" action="{{ route('candidate.settingUpdate') }}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <input type="hidden" name="type" value="contact">
-                                        <div class="dashboard-account-setting-item pb-0">
-                                            {{-- <h6>{{ __('locations') }}</h6>
-                                            <div class="row">
-                                                <div class="col-lg-12 mb-3">
-                                                    <x-website.map.map-warning />
-                                                    @php
-                                                        $map = setting('default_map');
-                                                    @endphp
-                                                    <div class="map mymap {{ $map == 'map-box' ? '' : 'd-none' }}"
-                                                        id="map-box">
-                                                    </div>
-                                                    <div id="google-map-div"
-                                                        class="{{ $map == 'google-map' ? '' : 'd-none' }}">
-                                                        <input id="searchInput" class="mapClass" type="text"
-                                                            placeholder="Enter a location">
-                                                        <div class="map mymap" id="google-map"></div>
-                                                    </div>
-                                                    @error('location')
-                                                        <span class="ml-3 text-md text-danger">{{ $message }}</span>
-                                                    @enderror
+                                        {{-- <input type="hidden" name="type" value="alert">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-check from-chekbox-custom rt-mb-15">
+                                                    <input name="shortlisted" class="form-check-input" type="checkbox"
+                                                        value="1" id="check1"
+                                                        {{ auth()->user()->shortlisted_alert ? 'checked' : '' }}>
+                                                    <x-forms.label for="check1" :required="false"
+                                                        name="notify_me_when_employers_shortlisted_me"
+                                                        class="form-check-label pointer f-size-14" />
                                                 </div>
-                                            </div> --}}
+                                                <div class="form-check from-chekbox-custom rt-mb-15">
+                                                    <input name="job_expired" class="form-check-input" type="checkbox"
+                                                        value="1" id="check2"
+                                                        {{ auth()->user()->job_expired_alert ? 'checked' : '' }}>
+                                                    <x-forms.label for="check2" :required="false"
+                                                        name="notify_me_when_my_applied_jobs_are_expire"
+                                                        class="form-check-label pointer f-size-14" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-check from-chekbox-custom">
+                                                    <input name="recent_activity" class="form-check-input"
+                                                        type="checkbox" value="1" id="check3"
+                                                        {{ auth()->user()->recent_activities_alert ? 'checked' : '' }}>
+                                                    <x-forms.label for="check3" :required="false"
+                                                        name="notify_me_my_recent_activities"
+                                                        class="form-check-label pointer f-size-14" />
+                                                </div>
+                                                <div class="form-check from-chekbox-custom">
+                                                    <input name="new_job" class="form-check-input" type="checkbox"
+                                                        value="1" id="check3"
+                                                        {{ auth()->user()->new_job_alert ? 'checked' : '' }}>
+                                                    <x-forms.label for="check3" :required="false"
+                                                        name="notify_me_when_new_job_published"
+                                                        class="form-check-label pointer f-size-14" />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="dashboard-account-setting-item">
-                                            <h6>{{ __('phone_email') }}</h6>
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="false" name="phone"
-                                                        class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <x-forms.input type="number" name="phone"
-                                                        value="{{ $contact->phone }}" id="phone"
-                                                        placeholder="{{ __('phone') }}" class="phonecode" />
-                                                </div>
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="false" name="secondary_phone"
-                                                        class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <x-forms.input type="number" name="secondary_phone"
-                                                        value="{{ $contact->secondary_phone }}" id="phone2"
-                                                        placeholder="{{ __('phone') }}" class="phonecode" />
-                                                </div>
-                                                <div class="col-lg-6 mb-3">
-                                                    <x-forms.label :required="false" name="email"
-                                                        class="pointer body-font-4 d-block text-gray-900 rt-mb-8" />
-                                                    <div class="fromGroup has-icon2">
-                                                        <div class="form-control-icon">
-                                                            <x-forms.input type="email" name="email"
-                                                                value="{{ $contact->email }}" id=""
-                                                                placeholder="{{ __('email_address') }}"
-                                                                class="" />
-                                                            <div class="icon-badge-2">
-                                                                <x-svg.envelope-icon />
-                                                            </div>
-                                                        </div>
+                                        <hr> --}}
+                                        <div class="row">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6>{{ __('job_alert') }}</h6>
+                                                <div class="input-group-text bg-transparent border-0" id="basic-addon1">
+                                                    <div class="form-check form-switch">
+                                                        <input type="hidden" value="0" name="received_job_alert">
+                                                        <input name="received_job_alert" class="form-check-input"
+                                                            type="checkbox" id="flexSwitchCheckDefault" value="1"
+                                                            {{ $candidate->received_job_alert ? 'checked' : '' }}>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary mt-4">
-                                                {{ __('save_changes') }}
-                                            </button>
+                                            <div class="col-lg-6 ">
+                                                <x-forms.label :required="false" name="job_role"
+                                                    class="f-size-14 text-gray-700 rt-mb-6" />
+                                                <div class="fromGroup has-icon2">
+                                                    <div class="form-control-icon">
+                                                        <select name="role_id" id="job_role">
+                                                            @foreach ($job_roles as $job_role)
+                                                            <option value="{{ $job_role->id }}" @if ($job_role->id ==
+                                                                $candidate->role_id) selected @endif>
+                                                                {{ $job_role->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <br>
+                                                        <p>
+                                                            {{ __('note_you_will_be_notified_for_this_role_only') }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('save_changes') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
-                                    <hr>
-                                    <div class="dashboard-account-setting-item setting-border">
-                                        {{-- <h6>{{ __('notification') }}</h6> --}}
-                                        {{-- <form id="alert" action="{{ route('candidate.settingUpdate') }}" --}}
-                                        <form action="{{ route('candidate.settingUpdate') }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="type" value="alert">
-                                            {{-- <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-check from-chekbox-custom rt-mb-15">
-                                                        <input name="shortlisted" class="form-check-input"
-                                                            type="checkbox" value="1" id="check1"
-                                                            {{ auth()->user()->shortlisted_alert ? 'checked' : '' }}>
-                                                        <x-forms.label for="check1" :required="false"
-                                                            name="notify_me_when_employers_shortlisted_me"
-                                                            class="form-check-label pointer f-size-14" />
-                                                    </div>
-                                                    <div class="form-check from-chekbox-custom rt-mb-15">
-                                                        <input name="job_expired" class="form-check-input"
-                                                            type="checkbox" value="1" id="check2"
-                                                            {{ auth()->user()->job_expired_alert ? 'checked' : '' }}>
-                                                        <x-forms.label for="check2" :required="false"
-                                                            name="notify_me_when_my_applied_jobs_are_expire"
-                                                            class="form-check-label pointer f-size-14" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-check from-chekbox-custom">
-                                                        <input name="recent_activity" class="form-check-input"
-                                                            type="checkbox" value="1" id="check3"
-                                                            {{ auth()->user()->recent_activities_alert ? 'checked' : '' }}>
-                                                        <x-forms.label for="check3" :required="false"
-                                                            name="notify_me_my_recent_activities"
-                                                            class="form-check-label pointer f-size-14" />
-                                                    </div>
-                                                    <div class="form-check from-chekbox-custom">
-                                                        <input name="new_job" class="form-check-input" type="checkbox"
-                                                            value="1" id="check3"
-                                                            {{ auth()->user()->new_job_alert ? 'checked' : '' }}>
-                                                        <x-forms.label for="check3" :required="false"
-                                                            name="notify_me_when_new_job_published"
-                                                            class="form-check-label pointer f-size-14" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>--}}
-                                            <div class="row">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h6>{{ __('job_alert') }}</h6>
-                                                    <div class="input-group-text bg-transparent border-0"
+                                </div>
+                                <div class="dashboard-account-setting-item setting-border">
+                                    <form id="visibility" action="{{ route('candidate.settingUpdate') }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <input type="hidden" name="type" value="visibility">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label
+                                                    class="text-gray-900 rt-mb-15 fw-medium">{{ __('profile_privacy') }}</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-text bg-transparent border border-gray-50 extra-design"
                                                         id="basic-addon1">
                                                         <div class="form-check form-switch">
-                                                            <input type="hidden" value="0"
-                                                                name="received_job_alert">
-                                                            <input name="received_job_alert" class="form-check-input"
+                                                            <input name="profile_visibility" class="form-check-input"
                                                                 type="checkbox" id="flexSwitchCheckDefault"
-                                                                value="1"
-                                                                {{ $candidate->received_job_alert ? 'checked' : '' }}>
+                                                                {{ $candidate->visibility ? 'checked' : '' }}>
+                                                            <span
+                                                                class="form-check-label f-size-14">{{ __('yes') }}</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6 ">
-                                                    <x-forms.label :required="false" name="job_role"
-                                                        class="f-size-14 text-gray-700 rt-mb-6" />
-                                                    <div class="fromGroup has-icon2">
-                                                        <div class="form-control-icon">
-                                                            {{-- <select name="role_id" id="job_role"> --}}
-                                                            <select name="role_id" id="job_role" class="rt-selectactive w-100-p" required>
-                                                              @foreach ($job_roles as $job_role)
-                                                                    <option value="{{ $job_role->id }}"
-                                                                        @if ($job_role->id == $candidate->role_id) selected @endif>
-                                                                        {{ $job_role->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            <br>
-                                                            <p>
-                                                                {{ __('note_you_will_be_notified_for_this_role_only') }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('save_changes') }}
-                                                    </button>
+                                                    <input disabled type="text" class="form-control"
+                                                        placeholder="Your profile is {{ $candidate->visibility ? 'public' : 'private' }} now"
+                                                        id="msalary">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="dashboard-account-setting-item setting-border">
-                                        <form id="visibility" action="{{ route('candidate.settingUpdate') }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <input type="hidden" name="type" value="visibility">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label
-                                                        class="text-gray-900 rt-mb-15 fw-medium">{{ __('profile_privacy') }}</label>
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-text bg-transparent border border-gray-50 extra-design"
-                                                            id="basic-addon1">
-                                                            <div class="form-check form-switch">
-                                                                <input name="profile_visibility" class="form-check-input"
-                                                                    type="checkbox" id="flexSwitchCheckDefault"
-                                                                    {{ $candidate->visibility ? 'checked' : '' }}>
-                                                                <span
-                                                                    class="form-check-label f-size-14">{{ __('yes') }}</span>
-                                                            </div>
+                                            <div class="col-lg-6">
+                                                <x-forms.label :required="false" name="resume_privacy"
+                                                    class="text-gray-900 rt-mb-15 fw-medium" />
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-text bg-transparent border border-gray-50 extra-design"
+                                                        id="basic-addon1">
+                                                        <div class="form-check form-switch">
+                                                            <input name="cv_visibility" class="form-check-input"
+                                                                type="checkbox" id="flexSwitchCheckDefault"
+                                                                {{ $candidate->cv_visibility ? 'checked' : '' }}>
+                                                            <span
+                                                                class="form-check-label f-size-14">{{ __('yes') }}</span>
                                                         </div>
-                                                        <input disabled type="text" class="form-control"
-                                                            placeholder="Your profile is {{ $candidate->visibility ? 'public' : 'private' }} now"
-                                                            id="msalary">
                                                     </div>
+                                                    <input disabled type="text" class="form-control"
+                                                        placeholder="Your resume is {{ $candidate->cv_visibility ? 'public' : 'private' }} now"
+                                                        id="msalary">
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <x-forms.label :required="false" name="resume_privacy"
-                                                        class="text-gray-900 rt-mb-15 fw-medium" />
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-text bg-transparent border border-gray-50 extra-design"
-                                                            id="basic-addon1">
-                                                            <div class="form-check form-switch">
-                                                                <input name="cv_visibility" class="form-check-input"
-                                                                    type="checkbox" id="flexSwitchCheckDefault"
-                                                                    {{ $candidate->cv_visibility ? 'checked' : '' }}>
-                                                                <span
-                                                                    class="form-check-label f-size-14">{{ __('yes') }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <input disabled type="text" class="form-control"
-                                                            placeholder="Your resume is {{ $candidate->cv_visibility ? 'public' : 'private' }} now"
-                                                            id="msalary">
-                                                    </div>
 
                                                 </div>
                                             </div>
@@ -1101,48 +1083,81 @@
         }, 10000);
     </script>
 
-    <!-- >=>Mapbox<=< -->
-    @include('map::scripts')
-    <!--=============== map box ===============-->
-    <x-website.map.map-box-check />
-    <script>
-        var token = "{{ $setting->map_box_key }}";
-        mapboxgl.accessToken = token;
-        const coordinates = document.getElementById('coordinates');
-        var oldlat = "{!! $candidate->lat ? $candidate->lat : setting('default_lat') !!}";
-        var oldlng = "{!! $candidate->long ? $candidate->long : setting('default_long') !!}";
-        const map = new mapboxgl.Map({
-            container: 'map-box',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [oldlng, oldlat],
-            zoom: 6
-        });
-        // Add the control to the map.
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl,
-                marker: false,
-            })
-        );
-        // Add the control to the map.
-        const geocoder = new MapboxGeocoder({
+<!-- >=>Mapbox<=< -->
+@include('map::scripts')
+<!--=============== map box ===============-->
+<x-website.map.map-box-check/>
+<script>
+    var token = "{{ $setting->map_box_key }}";
+    mapboxgl.accessToken = token;
+    const coordinates = document.getElementById('coordinates');
+    var oldlat = "{!! $candidate->lat ? $candidate->lat : setting('default_lat') !!}";
+    var oldlng = "{!! $candidate->long ? $candidate->long : setting('default_long') !!}";
+    const map = new mapboxgl.Map({
+        container: 'map-box',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [oldlng, oldlat],
+        zoom: 6
+    });
+    // Add the control to the map.
+    map.addControl(
+        new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
-            marker: {
-                color: 'orange',
-                draggable: true
-            },
-            mapboxgl: mapboxgl
-        });
-        var marker = new mapboxgl.Marker({
-                draggable: true
-            }).setLngLat([oldlng, oldlat])
-            .addTo(map);
-
-        function onDragEnd() {
-            const lngLat = marker.getLngLat();
-            let lat = lngLat.lat;
-            let lng = lngLat.lng;
+            mapboxgl: mapboxgl,
+            marker: false,
+        })
+    );
+    // Add the control to the map.
+    const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        marker: {
+            color: 'orange',
+            draggable: true
+        },
+        mapboxgl: mapboxgl
+    });
+    var marker = new mapboxgl.Marker({
+            draggable: true
+        }).setLngLat([oldlng, oldlat])
+        .addTo(map);
+    function onDragEnd() {
+        const lngLat = marker.getLngLat();
+        let lat = lngLat.lat;
+        let lng = lngLat.lng;
+        axios.get(
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?&types=address,neighborhood,locality,place,district,postcode,region,country&access_token=${token}`
+            )
+            .then((res) => {
+                var form = new FormData();
+                form.append('lat', lat);
+                form.append('lng', lng);
+                for (let i = 0; i < res.data.features.length; i++) {
+                    form.append(res.data.features[i].place_type[0], res.data.features[i].text);
+                }
+                axios.post(
+                        '/set/session', form
+                    )
+                    .then((res) => {
+                        // console.log(res.data);
+                        // toastr.success("Location Saved", 'Success!');
+                    })
+                    .catch((e) => {
+                        toastr.error("Something Wrong", 'Error!');
+                    });
+            })
+            .catch((e) => {
+                // toastr.error("Something Wrong", 'Error!');
+            });
+    }
+    function add_marker(event) {
+        var coordinates = event.lngLat;
+        marker.setLngLat(coordinates).addTo(map);
+    }
+    map.on('style.load', function () {
+        map.on('click', function (e) {
+            var coordinates = e.lngLat;
+            let lat = parseFloat(coordinates.lat);
+            let lng = parseFloat(coordinates.lng);
             axios.get(
                     `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?&types=address,neighborhood,locality,place,district,postcode,region,country&access_token=${token}`
                 )
@@ -1167,90 +1182,55 @@
                 .catch((e) => {
                     // toastr.error("Something Wrong", 'Error!');
                 });
-        }
-
-        function add_marker(event) {
-            var coordinates = event.lngLat;
-            marker.setLngLat(coordinates).addTo(map);
-        }
-        map.on('style.load', function() {
-            map.on('click', function(e) {
-                var coordinates = e.lngLat;
-                let lat = parseFloat(coordinates.lat);
-                let lng = parseFloat(coordinates.lng);
-                axios.get(
-                        `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?&types=address,neighborhood,locality,place,district,postcode,region,country&access_token=${token}`
-                    )
-                    .then((res) => {
-                        var form = new FormData();
-                        form.append('lat', lat);
-                        form.append('lng', lng);
-                        for (let i = 0; i < res.data.features.length; i++) {
-                            form.append(res.data.features[i].place_type[0], res.data.features[i].text);
-                        }
-                        axios.post(
-                                '/set/session', form
-                            )
-                            .then((res) => {
-                                // console.log(res.data);
-                                // toastr.success("Location Saved", 'Success!');
-                            })
-                            .catch((e) => {
-                                toastr.error("Something Wrong", 'Error!');
-                            });
-                    })
-                    .catch((e) => {
-                        // toastr.error("Something Wrong", 'Error!');
-                    });
-            });
         });
-        map.on('click', add_marker);
-        marker.on('dragend', onDragEnd);
-    </script>
-    <script>
-        $('.mapboxgl-ctrl-logo').addClass('d-none');
-        $('.mapboxgl-compact').addClass('d-none');
-        $('.mapboxgl-ctrl-attrib-inner').addClass('d-none');
-    </script>
-    <!-- ============== map box ============= -->
-    {{-- <!-- ============== google map ========= -->
-    <x-website.map.google-map-check />
-    <script>
-        function initMap() {
-            var token = "{{ $setting->google_map_key }}";
-            var oldlat = {!! $candidate->lat ? $candidate->lat : setting('default_lat') !!};
-            var oldlng = {!! $candidate->long ? $candidate->long : setting('default_long') !!};
-            const map = new google.maps.Map(document.getElementById("google-map"), {
-                zoom: 7,
-                center: {
-                    lat: oldlat,
-                    lng: oldlng
-                },
-            });
-            const image =
-                "https://gisgeography.com/wp-content/uploads/2018/01/map-marker-3-116x200.png";
-            const beachMarker = new google.maps.Marker({
-                draggable: true,
-                position: {
-                    lat: oldlat,
-                    lng: oldlng
-                },
-                map,
-                // icon: image
-            });
-            google.maps.event.addListener(map, 'click',
-                function(event) {
-                    pos = event.latLng
-                    beachMarker.setPosition(pos);
-                    let lat = beachMarker.position.lat();
-                    let lng = beachMarker.position.lng();
-                    axios.post(
-                        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${token}`
-                    ).then((data) => {
-                        if (data.data.error_message) {
-                            toastr.error(data.data.error_message, 'Error!');
-                            toastr.error('Your location is not set because of a wrong API key.', 'Error!');
-                        }
+    });
+    map.on('click', add_marker);
+    marker.on('dragend', onDragEnd);
+</script>
+<script>
+    $('.mapboxgl-ctrl-logo').addClass('d-none');
+    $('.mapboxgl-compact').addClass('d-none');
+    $('.mapboxgl-ctrl-attrib-inner').addClass('d-none');
+</script>
+<!-- ============== map box ============= -->
+<!-- ============== google map ========= -->
+<x-website.map.google-map-check/>
+<script>
+    function initMap() {
+        var token = "{{ $setting->google_map_key }}";
+        var oldlat = {!! $candidate->lat ? $candidate->lat : setting('default_lat') !!};
+        var oldlng = {!! $candidate->long ? $candidate->long : setting('default_long') !!};
+        const map = new google.maps.Map(document.getElementById("google-map"), {
+            zoom: 7,
+            center: {
+                lat: oldlat,
+                lng: oldlng
+            },
+        });
+        const image =
+            "https://gisgeography.com/wp-content/uploads/2018/01/map-marker-3-116x200.png";
+        const beachMarker = new google.maps.Marker({
+            draggable: true,
+            position: {
+                lat: oldlat,
+                lng: oldlng
+            },
+            map,
+            // icon: image
+        });
+        google.maps.event.addListener(map, 'click',
+            function (event) {
+                pos = event.latLng
+                beachMarker.setPosition(pos);
+                let lat = beachMarker.position.lat();
+                let lng = beachMarker.position.lng();
+                axios.post(
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${token}`
+                ).then((data) => {
+                    if(data.data.error_message){
+                        toastr.error(data.data.error_message, 'Error!');
+                        toastr.error('Your location is not set because of a wrong API key.', 'Error!');
+                    }
 
                         const total = data.data.results.length;
                         let amount = '';
@@ -1300,93 +1280,93 @@
                             toastr.error('Your location is not set because of a wrong API key.', 'Error!');
                         }
 
-                        const total = data.data.results.length;
-                        let amount = '';
-                        if (total > 1) {
-                            amount = total - 2;
+                    const total = data.data.results.length;
+                    let amount = '';
+                    if (total > 1) {
+                        amount = total - 2;
+                    }
+                    const result = data.data.results.slice(amount);
+                    let country = '';
+                    let region = '';
+                    for (let index = 0; index < result.length; index++) {
+                        const element = result[index];
+                        if (element.types[0] == 'country') {
+                            country = element.formatted_address;
                         }
-                        const result = data.data.results.slice(amount);
-                        let country = '';
-                        let region = '';
-                        for (let index = 0; index < result.length; index++) {
-                            const element = result[index];
-                            if (element.types[0] == 'country') {
-                                country = element.formatted_address;
-                            }
-                            if (element.types[0] == 'administrative_area_level_1') {
-                                const str = element.formatted_address;
-                                const first = str.split(' ').shift()
-                                region = first;
-                            }
+                        if (element.types[0] == 'administrative_area_level_1') {
+                            const str = element.formatted_address;
+                            const first = str.split(' ').shift()
+                            region = first;
                         }
-                        var form = new FormData();
-                        form.append('lat', lat);
-                        form.append('lng', lng);
-                        form.append('country', country);
-                        form.append('region', region);
-                        axios.post(
-                                '/set/session', form
-                            )
-                            .then((res) => {
-                                // console.log(res.data);
-                                // toastr.success("Location Saved", 'Success!');
-                            })
-                            .catch((e) => {
-                                toastr.error("Something Wrong", 'Error!');
-                            });
-                    })
-                });
-            // Search
-            var input = document.getElementById('searchInput');
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-            var infowindow = new google.maps.InfoWindow();
-            var marker = new google.maps.Marker({
-                map: map,
-                anchorPoint: new google.maps.Point(0, -29)
+                    }
+                    var form = new FormData();
+                    form.append('lat', lat);
+                    form.append('lng', lng);
+                    form.append('country', country);
+                    form.append('region', region);
+                    axios.post(
+                            '/set/session', form
+                        )
+                        .then((res) => {
+                            // console.log(res.data);
+                            // toastr.success("Location Saved", 'Success!');
+                        })
+                        .catch((e) => {
+                            toastr.error("Something Wrong", 'Error!');
+                        });
+                })
             });
-            autocomplete.addListener('place_changed', function() {
-                infowindow.close();
-                marker.setVisible(false);
-                var place = autocomplete.getPlace();
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                }
-            });
-        }
-        window.initMap = initMap;
-    </script>
-    <script>
-        @php
-            $link1 = 'https://maps.googleapis.com/maps/api/js?key=';
-            $link2 = $setting->google_map_key;
-            $Link3 = '&callback=initMap&libraries=places,geometry';
-            $scr = $link1 . $link2 . $Link3;
-        @endphp;
-    </script>
-    <script src="{{ $scr }}" async defer></script> --}}
-    <!-- =============== google map ========= -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("[data-toggle=tooltip]").tooltip()
-        })
-    </script>
-    <!-- >=>Mapbox<=< -->
-    <script>
-        $('#pills-contact-tab').on('click', function() {
-            setTimeout(() => {
-                map.resize();
-            }, 200);
-        })
-    </script>
-    <script type="text/javascript">
-        // feature field
-        function add_features_field() {
-            $("#multiple_feature_part").append(`
+        // Search
+        var input = document.getElementById('searchInput');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+        autocomplete.addListener('place_changed', function () {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+            }
+        });
+    }
+    window.initMap = initMap;
+</script>
+<script>
+    @php
+    $link1 = 'https://maps.googleapis.com/maps/api/js?key=';
+    $link2 = $setting->google_map_key;
+    $Link3 = '&callback=initMap&libraries=places,geometry';
+    $scr = $link1.$link2.$Link3;
+    @endphp;
+</script>
+<script src="{{ $scr }}" async defer></script>
+<!-- =============== google map ========= -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[data-toggle=tooltip]").tooltip()
+    })
+</script>
+<!-- >=>Mapbox<=< -->
+<script>
+    $('#pills-contact-tab').on('click', function () {
+        setTimeout(() => {
+            map.resize();
+        }, 200);
+    })
+</script>
+<script type="text/javascript">
+    // feature field
+    function add_features_field() {
+        $("#multiple_feature_part").append(`
         <div class="col-12 custom-select-padding">
             <div class="d-flex">
                 <div class="d-flex mborder">

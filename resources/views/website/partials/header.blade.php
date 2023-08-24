@@ -8,9 +8,8 @@
                         <div
                             class="mbl-top d-flex align-items-center justify-content-between container position-relative d-lg-none">
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('website.home') }}" class="brand-logo">
+                                {{-- <a href="{{ route('website.home') }}" class="brand-logo"> --}}
                                     <img src="{{ $setting->dark_logo_url }}" alt="">
-                                    {{-- <img src="{{asset('frontend\assets\images\skill9_png_logo-2.png')}}" alt="" > --}}
                                 </a>
                             </div>
 
