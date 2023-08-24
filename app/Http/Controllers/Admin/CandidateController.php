@@ -172,13 +172,13 @@ class CandidateController extends Controller
     {
         abort_if(!userCan('candidate.create'), 403);
 
-        $location = session()->get('location');
-        if (!$location) {
+        // $location = session()->get('location');
+        // if (!$location) {
 
-            $request->validate([
-                'location' => 'required',
-            ]);
-        }
+        //     $request->validate([
+        //         'location' => 'required',
+        //     ]);
+        // }
 
         try {
 
