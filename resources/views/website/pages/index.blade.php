@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
 @extends('website.layouts.app')
 
 @section('description')
@@ -69,7 +70,7 @@
                                     @endif
                                     <div class="flex-grow-0">
                                         <button type="submit"
-                                            class="btn btn-primary d-block d-md-inline-block ">{{ __('find_job') }}</button>
+                                            class="btn btn-primary d-block d-md-inline-block " style="background:#68a0bb">{{ __('find_job') }}</button>
                                     </div>
                                 </div>
                             </form>
@@ -86,7 +87,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-xl-6 d-flex align-items-center">
+                    <div class="col-xl-6 d-flex align-items-center" id="banner-img">
                         <div class="banner-mockup d-none d-xl-block w-100 text-right">
                             <div class="addimg-1 position-parent video-btn-center">
                                 @if ($cms_setting->home_page_banner_image)

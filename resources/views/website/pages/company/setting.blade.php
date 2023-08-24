@@ -139,7 +139,8 @@
                                                 </div>
                                                 <div class="col-lg-4 mb-3">
                                                     <x-forms.label name="team_size"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" :required="false"/>
+                                                        class="body-font-4 d-block text-gray-900 rt-mb-8"
+                                                        :required="false" />
                                                     <select name="team_size" class="rt-selectactive w-100-p">
                                                         @foreach ($team_sizes as $team_size)
                                                             <option
@@ -151,13 +152,14 @@
                                                 </div>
                                                 <div class="col-lg-6 mb-3">
                                                     <x-forms.label name="year_of_establishment"
-                                                        class="body-font-4 d-block text-gray-900 rt-mb-8" :required="false"/>
+                                                        class="body-font-4 d-block text-gray-900 rt-mb-8"
+                                                        :required="false" />
                                                     <div class="fromGroup">
                                                         <div
                                                             class="d-flex align-items-center form-control-icon date datepicker">
                                                             <input type="text" name="establishment_date"
                                                                 value="{{ $user->company->establishment_date ? date('d-m-Y', strtotime($user->company->establishment_date)) : old('establishment_date') }}"
-                                                                id="date" placeholder="dd/mm/yyyy"
+                                                                id="date" placeholder="DD/MM/YYYY"
                                                                 class="form-control border-cutom @error('establishment_date') is-invalid @enderror" />
                                                             <span class="input-group-addon input-group-text-custom">
                                                                 <x-svg.calendar-icon />
@@ -366,7 +368,7 @@
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="type" value="contact">
-                                        <div class="dashboard-account-setting-item pb-0">
+                                        {{-- <div class="dashboard-account-setting-item pb-0">
                                            <x-website.map.map-warning/>
                                             <h6>
                                                 {{ __('company_location') }}
@@ -388,7 +390,7 @@
                                                     <span class="ml-3 text-md text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="dashboard-account-setting-item">
                                             <h6>{{ __('phone') }} & {{ __('email') }}</h6>
@@ -579,9 +581,9 @@
             }
         );
 
-         // feature field
-    function add_features_field() {
-        $("#multiple_feature_part").append(`
+        // feature field
+        function add_features_field() {
+            $("#multiple_feature_part").append(`
             <div class="col-12 custom-select-padding">
                 <div class="d-flex">
                     <div class="d-flex mborder">
@@ -616,14 +618,14 @@
                 </div>
             </div>
         `);
-        $(".rt-selectactive").select2({ // minimumResultsForSearch: Infinity,
+            $(".rt-selectactive").select2({ // minimumResultsForSearch: Infinity,
+            });
+        }
+        $(document).on("click", "#remove_item", function() {
+            $(this).parent().parent().parent('div').remove();
         });
-    }
-    $(document).on("click", "#remove_item", function() {
-        $(this).parent().parent().parent('div').remove();
-    });
 
-    ClassicEditor
+        ClassicEditor
             .create(document.querySelector('#default'))
             .catch(error => {
                 console.error(error);
@@ -657,7 +659,7 @@
     @if ($setting->default_map == 'map-box')
         <!--=============== map box start ===============-->
         @include('map::scripts')
-        <x-website.map.map-box-check/>
+        <x-website.map.map-box-check />
 
         <script>
             var token = "{{ $setting->map_box_key }}";
@@ -774,7 +776,7 @@
         <!-- ============== map box end ============= -->
     @else
         <!-- ============== google map ========= -->
-        <x-website.map.google-map-check/>
+        {{-- <x-website.map.google-map-check/>
         <script>
             function initMap() {
                 var token = "{{ $setting->google_map_key }}";
@@ -926,6 +928,6 @@
                 $scr = $link1 . $link2 . $Link3;
             @endphp;
         </script>
-        <script src="{{ $scr }}" async defer></script>
+        <script src="{{ $scr }}" async defer></script> --}}
     @endif
 @endsection
