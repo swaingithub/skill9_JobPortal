@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <title>{{ config('app.name') }}</title>
+<link rel="stylesheet" href="{{asset('cssfile/style.css')}}">
 
     @include('website.partials.links')
     @yield('css')
@@ -23,8 +24,8 @@
                 <div class="container">
                     <div class="row w-100">
                         <div class="col-md-6">
-                            <a href="{{ route('website.home') }}" class="brand-logo"><img
-                                    src="{{ asset('frontend') }}/assets/images/logo/logo.png" alt="jobpilot_logo"></a>
+                            <a href="{{ route('website.home') }}" class="brand-logo">
+                                    <img src="{{ $setting->dark_logo_url }}" alt=""/></a>
                         </div>
                         <div class="col-md-6 d-md-flex align-items-center justify-content-end">
                             <div class="progress-wrap">
