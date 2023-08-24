@@ -137,13 +137,13 @@ class JobController extends Controller
     {
         abort_if(!userCan('job.create'), 403);
 
-        $location = session()->get('location');
-        if (!$location) {
+        // $location = session()->get('location');
+        // if (!$location) {
 
-            $request->validate([
-                'location' => 'required',
-            ]);
-        }
+        //     $request->validate([
+        //         'location' => 'required',
+        //     ]);
+        // }
 
         $highlight = $request->badge == 'highlight' ? 1 : 0;
         $featured = $request->badge == 'featured' ? 1 : 0;
