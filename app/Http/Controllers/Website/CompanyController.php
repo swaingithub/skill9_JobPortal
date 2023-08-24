@@ -119,13 +119,13 @@ class CompanyController extends Controller
 
     public function storeJob(Request $request)
     {
-        $location = session()->get('location');
-        if (!$location) {
+        // $location = session()->get('location');
+        // if (!$location) {
 
-            $request->validate([
-                'location' => 'required',
-            ]);
-        }
+        //     $request->validate([
+        //         'location' => 'required',
+        //     ]);
+        // }
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -564,7 +564,8 @@ class CompanyController extends Controller
             'organization_type' => 'required',
             'industry_type' => 'required',
             'team_size' => 'required',
-            'establishment_date' => 'nullable|date',
+            // 'establishment_date' => 'nullable|date',
+            'establishment_date' => ['nullable', 'regex:/^\d{2}-\d{2}-\d{4}$/'],
         ]);
 
         $company = Company::where('user_id', auth()->id())->first();
@@ -784,7 +785,7 @@ class CompanyController extends Controller
                 $request->validate([
                     'organization_type_id' =>  'required|string',
                     'industry_type_id' =>  'required|string',
-                    'establishment_date' => 'nullable',
+                    'establishment_date' => ['nullable', 'regex:/^\d{2}-\d{2}-\d{4}$/'],
                     'website' => 'nullable|url',
                     'vision' => 'required'
                 ]);
@@ -792,6 +793,7 @@ class CompanyController extends Controller
                 $update = $this->companyProfileUpdate($request);
                 if ($update) {
                     return redirect('company/account-progress?social');
+                    // dd('company/account-progress?social');
                 }
                 return back();
                 break;
@@ -812,15 +814,15 @@ class CompanyController extends Controller
                 break;
             case "contact":
 
-                $location = session()->get('location');
-                if (!$location) {
-                    $request->validate([
-                        'location' => 'required',
-                    ]);
-                }
+                // $location = session()->get('location');
+                // if (!$location) {
+                //     $request->validate([
+                //         'location' => 'required',
+                //     ]);
+                // }
 
                 $request->validate([
-                    'phone' => 'required|max:16|min:4',
+                    'phone' => 'required|max:10|min:10',
                     'email' => 'required|email',
                 ]);
 
