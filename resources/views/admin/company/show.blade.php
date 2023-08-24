@@ -45,11 +45,11 @@
                                             <td width="80%">
                                                 {{ $company->organization ? $company->organization->name : '' }}</td>
                                         </tr>
-                                        <tr class="mb-5">
+                                        {{-- <tr class="mb-5">
                                             <th width="20%">{{ __('nationality') }}</th>
                                             <td width="80%">
                                                 {{ $company->nationality ? $company->nationality->name : '' }}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr class="mb-5">
                                             <th width="20%">{{ __('establishment_date') }}</th>
                                             <td width="80%">
@@ -66,12 +66,12 @@
                                             <td width="80%">{{ $company->industry ? $company->industry->name : '' }}
                                             </td>
                                         </tr>
-                                        <tr class="mb-5">
+                                        {{-- <tr class="mb-5">
                                             <th width="20%">{{ __('address') }}</th>
                                             <td width="80%"><a
                                                     href="{{ $company->user->contactInfo->map_address }}">{{ $company->user->contactInfo->address }}</a>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr class="mb-5">
                                             <th width="20%">{{ __('contact_email') }}</th>
                                             <td width="80%">{{ $company->user->contactInfo->email }}</td>
@@ -137,7 +137,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -159,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -352,7 +352,7 @@
     </script>
     <!-- ================ mapbox map ============== -->
     <!-- ================ google map ============== -->
-    <x-website.map.google-map-check/>
+    {{-- <x-website.map.google-map-check/>
 
     <script>
         function initMap() {
@@ -392,6 +392,6 @@
             $scr = $link1 . $link2 . $Link3;
         @endphp;
     </script>
-    <script src="{{ $scr }}" async defer></script>
+    <script src="{{ $scr }}" async defer></script> --}}
     <!-- ================ google map ============== -->
 @endsection

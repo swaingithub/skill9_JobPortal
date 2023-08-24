@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                             {{-- Location --}}
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="description">{{ __('location') }}</label>
                                     <div class="p-half rounded">
@@ -194,7 +194,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
     </script>
     <!-- ================ mapbox map ============== -->
     <!-- ================ google map ============== -->
-    <x-website.map.google-map-check/>
+    {{-- <x-website.map.google-map-check/>
     <script>
         function initMap() {
             var token = "{{ $setting->google_map_key }}";
@@ -333,6 +333,6 @@
             $scr = $link1 . $link2 . $Link3;
         @endphp;
     </script>
-    <script src="{{ $scr }}" async defer></script>
+    <script src="{{ $scr }}" async defer></script> --}}
     <!-- ================ google map ============== -->
 @endsection
