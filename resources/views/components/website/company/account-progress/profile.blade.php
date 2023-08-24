@@ -29,6 +29,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="body-font-4 d-block text-gray-900 rt-mb-8">{{ __('industry_type') }}
@@ -55,7 +56,7 @@
                         </label>
                         <select type="text" name="team_size_id"
                             class="rt-selectactive @error('team_size_id') is-invalid @enderror w-100-p" id="team_size">
-                            <option value="" >{{ __('select_one') }}</option>
+                            <option value="">{{ __('select_one') }}</option>
                             @foreach ($teamSizes as $size)
                                 <option
                                     {{ $size->id == old('team_size_id', $user->company->team_size_id) ? 'selected' : '' }}
@@ -68,6 +69,7 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ __($message) }}</strong></span>
                         @enderror
                     </div>
+
                     <div class="col-lg-6 mb-3">
                         <label class="pointer body-font-4 d-block text-gray-900 rt-mb-8">
                             {{ __('website') }}
@@ -135,9 +137,10 @@
                 <span class="button-icon align-icon-right">
                     <i class="ph-arrow-right"></i>
                 </span>
-                <span class="button-text">
-                    {{ __('save_next') }}
-                </span>
+                    <span class="button-text">
+                        {{ __('save_next') }}
+                    </span>
+                </a>
             </span>
         </button>
     </fieldset>
