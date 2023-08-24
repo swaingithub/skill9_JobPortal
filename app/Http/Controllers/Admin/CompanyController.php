@@ -100,13 +100,13 @@ class CompanyController extends Controller
         abort_if(!userCan('company.create'), 403);
         $faker = Factory::create();
 
-        $location = session()->get('location');
-        if (!$location) {
+        // $location = session()->get('location');
+        // if (!$location) {
 
-            $request->validate([
-                'location' => 'required',
-            ]);
-        }
+        //     $request->validate([
+        //         'location' => 'required',
+        //     ]);
+        // }
 
         try {
             if ($request->logo) {
