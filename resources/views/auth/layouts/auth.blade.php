@@ -79,13 +79,13 @@
 </head>
 <body class="" dir="{{ langDirection() }}">
     <header class="site-header rt-fixed-top auth-header">
-        <div class="main-header">
+        {{-- <div class="main-header">
             <div class="navbar">
                 <div class="container container-full-xxl">
                     <a href="/" class="brand-logo"><img src="{{ $setting->dark_logo_url }}" alt=""></a>
                 </div><!-- /.container -->
             </div><!-- /.navbar -->
-        </div><!-- /.main-header -->
+        </div><!-- /.main-header --> --}}
     </header>
         @yield('content')
 
