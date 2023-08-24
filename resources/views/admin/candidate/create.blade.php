@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header">
                                 {{ __('location') }}
                                 <span class="text-red font-weight-bold">*</span>
@@ -72,7 +72,7 @@
                                 @enderror
 
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-6">
                         <div class="card">
@@ -312,6 +312,6 @@
                 console.error(error);
             });
     </script>
-    @include('map::set-googlemap')
+    {{-- @include('map::set-googlemap') --}}
     @include('map::set-mapbox')
 @endsection
