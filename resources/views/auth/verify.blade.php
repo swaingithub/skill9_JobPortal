@@ -1,9 +1,11 @@
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
+
 @extends('website.layouts.app')
 @section('title')
     {{ __('verify_email_address') }}
 @endsection
 @section('main')
-    <div class="row justify-content-center align-items-center full-height pt-5 mt-5">
+    <div class="row justify-content-center align-items-center full-height pt-5 mt-5" id="mail-verify-form">
         <div class="col-lg-4">
             <div class="auth-box2 mx-auto">
                 <form method="POST" action="{{ route('verification.resend') }}" class="rt-form">
