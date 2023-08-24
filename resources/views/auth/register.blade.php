@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;500;600;700;800&family=Qwigley&display=swap"
+    rel="stylesheet">
+
 @extends('auth.layouts.auth')
 
 @section('meta')
@@ -19,26 +25,23 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row" id="login-row">
         <div class="auth-page2 order-1 order-lg-0">
-            <div class="rt-spacer-100  rt-spacer-lg-50 rt-spacer-xs-50"></div>
-            {{-- <div class="rt-spacer-100 rt-spacer-lg-50 rt-spacer-xs-0"></div>
-            <div class="rt-spacer-50 rt-spacer-lg-0 rt-spacer-xs-0"></div> --}}
+            {{-- <div class="rt-spacer-100  rt-spacer-lg-50 rt-spacer-xs-50"></div>--}}
+            {{-- <div class="rt-spacer-100 rt-spacer-lg-50 rt-spacer-xs-0"></div> --}}
+            <div class="rt-spacer-50 rt-spacer-lg-0 rt-spacer-xs-0"></div>
             <div class="container">
                 <div class="row ">
                     <div class="col-xl-5 col-lg-8 col-md-9">
                         <div class="auth-box2">
                             <form id="formId" action="{{ route('register') }}" method="POST" class="rt-form">
                                 @csrf
+                                <a href="/" class="brand-logo" id="img-login-logo"><img
+                                        src="{{asset('frontend\assets\images\SKILLS FOR FUTURE (3).png')}}"  alt=""></a>
+                                 <hr style="border: black; height:2px">
                                 <div class="row">
                                     <div class="col-lg-8 col-md-12">
                                         <h4 class="rt-mb-20">{{ __('create_account') }}</h4>
-                                        <span class="d-block body-font-3 text-gray-600 rt-mb-32">
-                                            {{ __('already_have_account') }}
-                                            <span>
-                                                <a href="{{ route('login') }}">{{ __('log_in') }}</a>
-                                            </span>
-                                        </span>
                                     </div>
                                     <div class="col-lg-4 col-md-12 align-self-center rt-mb-lg-20">
                                         @if (old('role'))
@@ -138,7 +141,17 @@
                                         </span>
                                     </span>
                                 </button>
-                                <div class="d-flex justify-content-between btn-group flex-column flex-md-row ">
+                                 <span class="d-block body-font-3 text-gray-600 rt-mb-32 text-end">
+                                            {{ __('already_have_account') }}
+                                            <span>
+                                                <a href="{{ route('login') }}">{{ __('log_in') }}</a>
+                                            </span>
+                                </span>
+                                <h2
+                                style="  font-size: 14px; width: 100%; text-align: center; border-bottom: 1px solid rgb(162, 161, 161);  line-height: 0.1em; margin: 10px 0 20p">
+                                <span style="background :#d5edf6; padding:0 10px; color:gray ">Or Sign Up Using</span>
+                            </h2>
+                                <div class="d-flex justify-content-between btn-group flex-column flex-md-row mt-5 ">
                                     <div class="row">
                                         @php
                                             $google = config('zakirsoft.google_active') && config('zakirsoft.google_id') && config('zakirsoft.google_secret');
@@ -239,6 +252,10 @@
         <div class="auth-right-sidebar reg-sidebar order-lg-1 order-0">
             <div class="sidebar-bg" style="background-image: url({{ asset($cms_setting->register_page_image) }})">
                 <div class="sidebar-content">
+                    <h4 style=" font-family:  'Handjet',sans-serif; font-weight:bold; word-spacing: 5px; margin-left:4rem">
+                       <SPAN style="color: white">" </SPAN><span style="color: #dd5399">CHANGE</span> <span style=" color:#f1cf45">HAPPENS</span>
+                        <span style="color: #55a2bf;">TODAY</span><SPAN style="color: white"> "</SPAN>
+                    </h4>
                     <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4>
                     <div class="d-flex">
                         <div class="flex-grow-1 rt-mb-24">

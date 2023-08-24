@@ -1,8 +1,13 @@
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;500;600;700;800&family=Qwigley&display=swap"
+    rel="stylesheet">
 @extends('auth.layouts.auth')
 
 @section('meta')
     @php
-    $data = metaData('login');
+        $data = metaData('login');
     @endphp
 @endsection
 
@@ -19,22 +24,26 @@
 @endsection
 
 @section('content')
-    <div class="row mt-5">
+    <div class="row" id="login-row">
         <div class="full-height col-12 order-1 order-lg-0">
             <div class="container">
                 <div class="row full-height align-items-center">
                     <div class="col-xl-5 col-lg-6 col-md-12">
                         <div class="auth-box2">
+                            <div class="rt-spacer-50 rt-spacer-lg-0 rt-spacer-xs-0"></div>
+
                             <form action="{{ route('login') }}" method="POST" class="rt-form" id="login_form">
                                 @csrf
-                                <h4 class="rt-mb-20">{{ __('log_in') }}</h4>
-                                <span class="d-block body-font-3 text-gray-600 rt-mb-32">
-                                    {{ __('dont_have_account') }}
-                                    <span>
-                                        <a href="{{ route('register') }}">{{ __('create_account') }}
-                                        </a>
-                                    </span>
-                                </span>
+                                <a href="/" class="brand-logo" id="img-login-logo"><img
+                                        src="{{ asset('frontend\assets\images\SKILLS FOR FUTURE (3).png') }}"
+                                        alt=""></a>
+                                {{-- <h4
+                                    style=" font-family:  'Handjet',sans-serif; font-weight:bold; word-spacing: 5px; color:">
+                                    "<span style="color: #dd5399">CHANGE</span> <span style=" color:#f1cf45">HAPPENS</span>
+                                    <span style="color: #55a2bf;">TODAY</span>"
+                                </h4>
+                                <hr style="border: black; height:2px"> --}}
+                                <h6 class="rt-mb-20 text-center text-gray-400 mt-3">{{ __('LOGIN SKILL 9 JOB PORTAL ') }}</h6>
                                 <div class="fromGroup rt-mb-15">
                                     <input type="email" name="email" id="email"
                                         class="form-control @error('email') is-invalid @enderror"
@@ -84,8 +93,19 @@
                                         </span>
                                     </span>
                                 </button>
+                                <span class="d-block body-font-3 text-gray-600 rt-mb-32 text-end">
+                                    {{ __('dont_have_account') }}
+                                    <span>
+                                        <a href="{{ route('register') }}">{{ __('create_account') }}
+                                        </a>
+                                    </span>
+                                </span>
                             </form>
-                            <div class="">
+                            <h2
+                                style="  font-size: 14px; width: 100%; text-align: center; border-bottom: 1px solid rgb(157, 157, 157);  line-height: 0.1em; margin: 10px 0 20p">
+                                <span style="background :#d5edf6; padding:0 10px; color:gray ">Or Sign Up Using</span>
+                            </h2>
+                            <div class="mt-5">
                                 <div class="row">
                                     @php
                                         $google = config('zakirsoft.google_active') && config('zakirsoft.google_id') && config('zakirsoft.google_secret');
@@ -180,6 +200,12 @@
         <div class="auth-right-sidebar order-lg-1 order-0">
             <div class="sidebar-bg" style="background-image: url({{ asset($cms_setting->login_page_image) }})">
                 <div class="sidebar-content">
+                    <h4
+                        style=" font-family:  'Handjet',sans-serif; font-weight:bold; word-spacing: 5px; margin-left: 4rem">
+                        <SPAN style="color: white">" </SPAN><span style="color: #dd5399">CHANGE</span> <span
+                            style=" color:#f1cf45">HAPPENS</span>
+                        <span style="color: #55a2bf;">TODAY</span><SPAN style="color: white"> "</SPAN>
+                    </h4>
                     <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4>
                     <div class="d-flex">
                         <div class="flex-grow-1 rt-mb-24">
