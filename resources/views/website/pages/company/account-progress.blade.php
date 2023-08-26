@@ -1,4 +1,5 @@
 @extends('auth.layouts.progress')
+<link rel="stylesheet" href="{{ asset('cssfile/style.css') }}">
 @section('content')
     <header class="n-header account-setup-header">
         <div class="main-header">
