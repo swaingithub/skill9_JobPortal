@@ -7,8 +7,8 @@
                 <div class="container">
                     <div class="row w-100">
                         <div class="col-sm-12 col-md-6">
-                            <a href="{{ route('website.home') }}" class="brand-logo">
-                                <img src="{{ $setting->dark_logo_url }}" alt="skill9 jobportal">
+                            <a href="{{ route('website.home') }}" class="brand-logo" >
+                                <img src="{{ $setting->dark_logo_url }}" alt="skill9 jobportal" style="width:70px" id="account-logo">
                             </a>
                         </div>
                         <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center">
