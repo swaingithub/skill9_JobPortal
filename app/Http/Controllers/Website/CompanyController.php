@@ -433,7 +433,6 @@ class CompanyController extends Controller
         $data['industry_types'] = IndustryType::all();
         $data['team_sizes'] = TeamSize::all();
         $data['nationalities'] = Nationality::all();
-
         return view('website.pages.company.setting', $data);
     }
 
@@ -566,6 +565,7 @@ class CompanyController extends Controller
             'team_size' => 'required',
             // 'establishment_date' => 'nullable|date',
             'establishment_date' => ['nullable', 'regex:/^\d{2}-\d{2}-\d{4}$/'],
+            'nationality' => 'required',
         ]);
 
         $company = Company::where('user_id', auth()->id())->first();
@@ -594,6 +594,7 @@ class CompanyController extends Controller
                 'establishment_date' => $request->establishment_date ?? null,
                 'website' => $request->website,
                 'vision' => $request->vision,
+                'nationality_id' => $request->nationality,
             ]);
         }
 
