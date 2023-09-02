@@ -22,6 +22,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Modules\Location\Entities\State;
 use Modules\Location\Entities\Country;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CandidateController extends Controller
@@ -427,6 +428,12 @@ class CandidateController extends Controller
         ]);
 
         return true;
+    }
+    public function viewResume($id) {
+    $resume = CandidateResume::findOrFail($id);
+
+
+    return view('view_resume', compact('resume'));
     }
 
     public function resumeStore(Request $request){

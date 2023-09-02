@@ -9,7 +9,7 @@ use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Website\CandidateController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
+use App\Http\Controllers\NotificationController;
 // Authentication
 if (!app()->runningInConsole()) {
     Auth::routes(['verify' => setting('email_verification')]);
@@ -60,6 +60,8 @@ Route::controller(WebsiteController::class)->name('website.')->group(function ()
     Route::get('/selected/country/remove', 'removeSelectedCountry')->name('remove.country');
     Route::get('job/autocomplete', 'jobAutocomplete')->name('job.autocomplete');
 });
+// Route::post('/user/notification/clear', 'NotificationController@clear')->name('user.notification.clear');
+Route::post('user/notification/clear', 'NotificationController@clearNotifications')->name('user.notification.clear');
 
 // Social Authentication
 Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
@@ -147,3 +149,6 @@ Route::get('/lang/{lang}', function ($lang) {
 
     return back();
 });
+
+//Route for view the resume
+Route::get('/view-resume/{id}', [CandidateController::class, 'viewResume'])->name('view-resume');
