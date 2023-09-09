@@ -128,10 +128,15 @@
                                 </thead>
                                 <tbody>
                                     @if ($jobs->count() > 0)
-                                        @foreach ($jobs as $job)
+                                     @php
+                                        $currentPage = $jobs->currentPage();
+                                        $perPage = $jobs->perPage();
+                                        $startIndex = ($currentPage - 1) * $perPage;
+                                     @endphp
+                                            @foreach ($jobs as $job)
                                             <tr>
                                                 <td class="text-center" tabindex="0">
-                                                    {{ $loop->index + 1 }}
+                                                    {{ $startIndex + $loop->index + 1 }}
                                                 </td>
                                                 <td class="text-center" tabindex="0">
                                                     <a href="{{ route('job.show', $job->id) }}">
