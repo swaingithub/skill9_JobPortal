@@ -206,7 +206,8 @@
                             style=" color:#f1cf45">HAPPENS</span>
                         <span style="color: #55a2bf;">TODAY</span><SPAN style="color: white"> "</SPAN>
                     </h4>
-                    <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4>
+                    {{-- <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4> --}}
+                    <h4 class="text-gray-10 rt-mb-50">{{ livejob() }} {{ __('open_jobs_waiting_for_you') }}</h4>
                     <div class="d-flex">
                         <div class="flex-grow-1 rt-mb-24">
                             <div class="card jobcardStyle1 counterbox4">
