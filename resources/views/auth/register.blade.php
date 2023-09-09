@@ -41,7 +41,7 @@
                                  <hr style="border: black; height:2px">
                                 <div class="row">
                                     <div class="col-lg-8 col-md-12">
-                                        <h4 class="rt-mb-20">{{ __('create_account') }}</h4>
+                                        <h4 class="rt-mb-20 f-size-25 text-gray-500">{{ __('create_account') }}</h4>
                                     </div>
                                     <div class="col-lg-4 col-md-12 align-self-center rt-mb-lg-20">
                                         @if (old('role'))
@@ -256,7 +256,8 @@
                        <SPAN style="color: white">" </SPAN><span style="color: #dd5399">CHANGE</span> <span style=" color:#f1cf45">HAPPENS</span>
                         <span style="color: #55a2bf;">TODAY</span><SPAN style="color: white"> "</SPAN>
                     </h4>
-                    <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4>
+                    {{-- <h4 class="text-gray-10 rt-mb-50">{{ openJobs() }} {{ __('open_jobs_waiting_for_you') }}</h4> --}}
+                    <h4 class="text-gray-10 rt-mb-50">{{ livejob() }} {{ __('open_jobs_waiting_for_you') }}</h4>
                     <div class="d-flex">
                         <div class="flex-grow-1 rt-mb-24">
                             <div class="card jobcardStyle1 counterbox4">
