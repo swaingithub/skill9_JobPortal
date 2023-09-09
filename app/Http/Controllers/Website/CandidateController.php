@@ -299,9 +299,11 @@ class CandidateController extends Controller
             'birth_date' => 'date',
             'nationality' => 'required',
             'birth_date' =>  'required',
+            'birth-date' => ['nullable', 'regex:/^\d{2}-\d{2}-\d{4}$/'],
             'gender' => 'required',
             'marital_status' => 'required',
             'profession' => 'required',
+            'birth_date' => ['nullable', 'date', 'before:today'],
         ]);
 
         $dateTime = Carbon::parse($request->birth_date);
