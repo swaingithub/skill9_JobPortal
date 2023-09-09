@@ -566,6 +566,7 @@ class CompanyController extends Controller
             // 'establishment_date' => 'nullable|date',
             'establishment_date' => ['nullable', 'regex:/^\d{2}-\d{2}-\d{4}$/'],
             'nationality' => 'required',
+            'establishment_date' => ['nullable', 'date', 'before:today'],
         ]);
 
         $company = Company::where('user_id', auth()->id())->first();
