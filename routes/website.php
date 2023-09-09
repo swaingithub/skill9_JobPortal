@@ -152,3 +152,5 @@ Route::get('/lang/{lang}', function ($lang) {
 
 //Route for view the resume
 Route::get('/view-resume/{id}', [CandidateController::class, 'viewResume'])->name('view-resume');
+
+Route::get('delete/notifications', [NotificationController::class,'delete'])->name('deleteNotification');

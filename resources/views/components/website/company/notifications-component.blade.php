@@ -22,7 +22,7 @@
         <div class="notification-bar">
             <a href="#" onclick="ReadNotification()" class="notification-header">
                 <h2>{{ __('notifications') }}</h2>
-                <p>{{ __('mark_all_as_read') }}</p>
+                {{-- <p>{{ __('mark_all_as_read') }}</p> --}}
             </a>
             <div class="devider">
             </div>
@@ -159,6 +159,14 @@
                         <div class="text-center">{{ __('no_notification') }}</div>
                     @endif
                 </ul>
+                {{-- <a href="#" class="notification-header" onclick="clearNotifications()">
+                    <p style="text-align: center; background:red; margin-left:100px" class="btn btn-danger text-white">{{ __('Clear All') }}</p>
+                </a> --}}
+            </div>
+            <div class="text-center bg-gray-50 p-2">
+                    <a href="{{ route('deleteNotification') }}">
+                        <span class="body-font-1 ft-wt-5 m-2 underCs text-danger">{{ __('ClearAll') }}</span>
+                    </a>
             </div>
             @if (companyNotificationsCount() > 6)
                 <div class="text-center bg-gray-50 p-2">
